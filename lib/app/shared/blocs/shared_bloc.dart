@@ -3,19 +3,18 @@ import 'package:flutter_pensamento/app/shared/models/sentimento_model.dart';
 import 'package:rxdart/subjects.dart';
 
 class SharedBloc extends BlocBase {
-  List<SentimentoModel> sentimentoList = [];
 
-  BehaviorSubject<List<SentimentoModel>> _listController;
+  BehaviorSubject<List<SentimentoModel>> _listController = BehaviorSubject.seeded([]);
 
   Stream get listOut => _listController.stream;
 
-  SharedBloc() {
-    _listController = BehaviorSubject.seeded(sentimentoList);
+  expulgar(){
+    _listController.add([]);
   }
 
   addNovoSentimento(SentimentoModel sentimentoModel) {
-    sentimentoList.add(sentimentoModel);
-    _listController.add(sentimentoList);
+    _listController.value.add(sentimentoModel);
+    _listController.add(_listController.value);
   }
 
   //dispose will be called automatically by closing its streams

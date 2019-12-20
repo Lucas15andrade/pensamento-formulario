@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pensamento/app/modules/sentimento/pages/descrever/descrever_bloc.dart';
 
 import '../../sentimento_bloc.dart';
 import '../../sentimento_module.dart';
@@ -25,6 +26,7 @@ class _DescreverPageState extends State<DescreverPage> {
               height: 30,
             ),
             TextField(
+              maxLines: 5,
               onChanged: (value) {
                 var model = SentimentoModule.to.bloc<SentimentoBloc>().model;
                 model.subtitle = value;
@@ -37,13 +39,11 @@ class _DescreverPageState extends State<DescreverPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
                 onPressed: () {
-                  SentimentoModule.to
-                      .bloc<SentimentoBloc>()
-                      .pageController
-                      .jumpToPage(1);
+                SentimentoModule.to.bloc<DescreverBloc>().addModel();
+                Navigator.pop(context);
                 },
                 child: Text(
-                  "Próximo",
+                  "CADASTRAR",
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                   ),

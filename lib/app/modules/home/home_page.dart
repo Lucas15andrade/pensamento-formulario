@@ -6,8 +6,6 @@ import 'package:flutter_pensamento/app/shared/models/sentimento_model.dart';
 import 'package:flutter_pensamento/app/shared/widgets/smille.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -21,6 +19,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Pensamentos"),
+      ),
+      bottomNavigationBar: RaisedButton(
+        onPressed: AppModule.to.bloc<SharedBloc>().expulgar,
+        color: Theme.of(context).primaryColor,
+        child: Text("Expulgar"),
       ),
       body: StreamBuilder<List<SentimentoModel>>(
         stream: blocSentimento.listOut,
